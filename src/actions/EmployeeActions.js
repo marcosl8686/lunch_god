@@ -14,12 +14,12 @@ export const foodUpdate = ({ prop, value }) => {
   };
 };
 
-export const foodCreate = ({ name, food_type, shift }) => {
+export const foodCreate = ({name, food_type, shift}) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/weekly_menu`)
-      .push({ name, food_type, shift })
+      .push({name, food_type, shift})
       .then(() => {
         dispatch({ type: FOOD_CREATE });
         Actions.main({ type: 'reset' });

@@ -8,7 +8,7 @@ import ListItem from './ListItem';
 class EmployeeList extends Component {
   componentWillMount() {
     this.props.foodFetch();
-
+    console.log(this.props, 'List component mounted')
     this.createDataSource(this.props);
   }
 
@@ -16,16 +16,16 @@ class EmployeeList extends Component {
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
-
+    console.log(nextProps, 'List component mounted NEXT PROPS')
     this.createDataSource(nextProps);
   }
 
-  createDataSource({ employees }) {
+  createDataSource({ selected_food }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    this.dataSource = ds.cloneWithRows(employees);
+    this.dataSource = ds.cloneWithRows(selected_food);
   }
 
   renderRow(employee) {
@@ -44,11 +44,11 @@ class EmployeeList extends Component {
 }
 
 const mapStateToProps = state => {
-  const employees = _.map(state.employees, (val, uid) => {
+  const selected_food = _.map(state.selected_food, (val, uid) => {
     return { ...val, uid };
   });
 
-  return { employees };
+  return { selected_food };
 };
 
 export default connect(mapStateToProps, { foodFetch })(EmployeeList);

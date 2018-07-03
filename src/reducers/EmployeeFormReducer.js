@@ -3,7 +3,8 @@ import { FOOD_UPDATE, FOOD_CREATE, FOOD_SAVE_SUCCESS } from '../actions/types';
 const INITIAL_STATE = {
 	name: '',
 	food_type: '',
-	shift: ''
+	shift: '',
+    uid: ''
 };
 //reset all the attributes from the FORM
 export default (state = INITIAL_STATE, action) => {

@@ -6,5 +6,5 @@ import EmployeeReducer from './EmployeeReducer';
 export default combineReducers({
   auth: AuthReducer,
 	foodForm: EmpoyeeFormReducer,
-	employees: EmployeeReducer
+	selected_food: EmployeeReducer
 });

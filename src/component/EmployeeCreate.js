@@ -29,7 +29,7 @@ class FoodCreate extends Component {
 
 const mapStateToProps = (state) => {
 	const {name, food_type, shift} = state.foodForm;
-	
+	console.log(state, "STATE AT CREATE")
 	return {name, food_type, shift};
 }
 
