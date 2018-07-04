@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import { foodFetch } from '../actions';
-import ListItem from './ListItem';
+import ListRestaurant from './ListItem';
+
 
 class EmployeeList extends Component {
   componentWillMount() {
@@ -29,7 +30,7 @@ class EmployeeList extends Component {
   }
 
   renderRow(employee) {
-    return <ListItem employee={employee} />;
+    return <ListRestaurant employee={employee} />;
   }
 
   render() {

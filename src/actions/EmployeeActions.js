@@ -14,12 +14,12 @@ export const foodUpdate = ({ prop, value }) => {
   };
 };
 
-export const foodCreate = ({name, food_type, shift}) => {
+export const foodCreate = ({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating}) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/weekly_menu`)
-      .push({name, food_type, shift})
+      .push({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating})
       .then(() => {
         dispatch({ type: FOOD_CREATE });
         Actions.main({ type: 'reset' });
@@ -38,12 +38,12 @@ export const foodFetch = () => {
   };
 };
 
-export const foodSave = ({ name, food_type, shift, uid }) => {
+export const foodSave = ({ name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating, uid}) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/weekly_menu/${uid}`)
-      .set({ name, food_type, shift })
+      .set({ name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating })
       .then(() => {
         dispatch({ type: FOOD_SAVE_SUCCESS });
         Actions.main({ type: 'reset' });

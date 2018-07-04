@@ -10,7 +10,7 @@ class EmployeeForm extends Component {
 		return(
 			<View>
 				<CardSection>
-					<Input label="Name" placeholder="Jane" value={this.props.name} onChangeText ={ value => this.props.foodUpdate({prop: 'name', value: value})}/>
+					<Input label="Name" placeholder="Cancun Juice" value={this.props.name} onChangeText ={ value => this.props.foodUpdate({prop: 'name', value: value})}/>
 				</CardSection>
 				<CardSection>
 					<Input label="Type" placeholder="Mexican Food" value={this.props.food_type} onChangeText = { value => this.props.foodUpdate({prop: 'food_type', value: value})}/>
