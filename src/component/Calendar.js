@@ -13,29 +13,23 @@ const _today = moment().format(_format)
 const _maxDate = moment().add(15, 'days').format(_format)
 
 class Lunch_Calendar extends React.Component {
-	
+	state = {_markedDates: {[_today]: {disabled: true}}}
 	 componentWillMount() {
     this.props.foodFetch();
     console.log(this.props, 'Calendar List component mounted')
   }
 
   componentWillReceiveProps(nextProps) {
+		let myObj = {}
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
     console.log(nextProps, 'Calendar NEXT PROPS')
-  }
-  // It is not possible to select some to current day.
-  initialState = {
-      [_today]: {disabled: true}
-  }
-  
-  constructor() {
-    super();
-
-    this.state = {
-      _markedDates: this.initialState
-    }
+		_.each(nextProps.selected_food, (value, prop) => {
+			myObj[value.shift] = {disabled: false}
+		});
+		this.setState({_markedDates: myObj})
+		console.log(this.sate)
   }
   
   onDaySelect = (day) => {
