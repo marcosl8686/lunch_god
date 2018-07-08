@@ -5,6 +5,11 @@ import {connect} from 'react-redux';
 import {foodUpdate, foodCreate} from '../actions';
 import {Card, CardSection, Button} from './common';
 import EmployeeForm from './EmployeeForm';
+import moment from 'moment';
+
+const _format = 'YYYY-MM-DD'
+const _today = moment().format(_format)
+
 
 var yelpFeed;
 
@@ -23,7 +28,7 @@ class FoodCreate extends Component {
 		console.log(location, "location")
 		console.log(image_url, "image url")
 		console.log(rating, "rating")
-		this.props.foodCreate({name,food_type,shift: shift || 'Monday', location, image_url,rating, M_rating, L_rating, P_rating, A_rating });
+		this.props.foodCreate({name,food_type,shift: shift || _today, location, image_url,rating, M_rating, L_rating, P_rating, A_rating });
 	}
 	onSearch() {
 		const {name, food_type, shift} = this.props;

@@ -16,7 +16,7 @@ class Selected_View extends Component {
 		const { currentUser } = firebase.auth();
 	  console.log(currentUser.uid, "CURRENT USER")
 		console.log("DRgkzDVuUSdzpYxteoswJuBNNIv1")
-		const {name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating} = this.props.employee;
+		const {name, food_type, markedDates, location, image_url, rating, M_rating, L_rating, P_rating, A_rating} = this.props.employee;
 		switch (currentUser.uid) {
 			case 'DRgkzDVuUSdzpYxteoswJuBNNIv1':
 				console.log("marcos Rating")

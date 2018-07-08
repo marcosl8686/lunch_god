@@ -3,7 +3,11 @@ import {View, Text, Picker} from 'react-native';
 import {connect} from 'react-redux';
 import {foodUpdate} from '../actions'
 import {CardSection, Input} from './common';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 
+const _format = 'YYYY-MM-DD'
+const _today = moment().format(_format)
 
 class EmployeeForm extends Component {
 	render() {
@@ -17,13 +21,28 @@ class EmployeeForm extends Component {
 				</CardSection>
 				<CardSection style={{ flexDirection: 'column'}}>
 					<Text style={styles.pickerTextSyle}>Select Day:</Text>
-					<Picker selectedValue={this.props.shift} onValueChange={selectedDay => this.props.foodUpdate({prop: 'shift', value: selectedDay})}>
-						<Picker.Item label="Monday" value="Monday" />
-						<Picker.Item label="Tuesday" value="Tuesday" />
-						<Picker.Item label="Wednesday" value="Wednesday" />
-						<Picker.Item label="Thursday" value="Thursday" />
-						<Picker.Item label="Friday" value="Friday" />
-					</Picker>
+					<DatePicker
+						style={{width: 200}}
+						date={_today}
+						mode="date"
+						placeholder="select date"
+						format="YYYY-MM-DD"
+						confirmBtnText="Confirm"
+						cancelBtnText="Cancel"
+						customStyles={{
+							dateIcon: {
+								position: 'absolute',
+								left: 0,
+								top: 4,
+								marginLeft: 0
+							},
+							dateInput: {
+								marginLeft: 36
+							}
+							// ... You can check the source to find the other keys.
+						}}
+						onDateChange={(date) => this.props.foodUpdate({prop: 'shift', value: date})}
+					/>
 		 		</CardSection>
 				
 			</View>
