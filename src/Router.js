@@ -1,7 +1,7 @@
 import React from 'react';
 import {Scene, Router, Actions} from 'react-native-router-flux';
 import LoginForm from './component/LoginForm';
-import EmployeeList from './component/EmployeeList';
+import ListItem from './component/ListItem';
 import EmployeeCreate from './component/EmployeeCreate';
 import EmployeeEdit from './component/EmployeeEdit';
 import Selected_view from './component/Selected_View';
@@ -16,7 +16,7 @@ const RouterComponent = () => {
 				</Scene>
 				<Scene key='main'>
 					<Scene key='Lunch_Calendar'rightTitle="Add" onRight={() => { Actions.employeeCreate()}}  component={Lunch_Calendar} title="Selected Restaurant" />
-					<Scene key='EmployeeList'  component={EmployeeList} title="Employee List" />
+					<Scene key='ListItem'  component={ListItem} title="Employee List" />
 					<Scene key='Selected_view' component={Selected_view} title="Selected Restaurant" />
 					<Scene key='employeeCreate' component={EmployeeCreate} title="Schedule Lunch" />
 					<Scene key='employeeEdit'  component={EmployeeEdit} title='Edit Restaurant' />

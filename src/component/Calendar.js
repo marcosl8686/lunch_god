@@ -6,6 +6,7 @@ import { Calendar } from 'react-native-calendars';
 import { connect } from 'react-redux';
 import { foodFetch } from '../actions';
 import ListRestaurant from './ListItem';
+import {Actions} from 'react-native-router-flux';
 
 
 const _format = 'YYYY-MM-DD'
@@ -26,34 +27,34 @@ class Lunch_Calendar extends React.Component {
     // this.props is still the old set of props
     console.log(nextProps, 'Calendar NEXT PROPS')
 		_.each(nextProps.selected_food, (value, prop) => {
-			myObj[value.shift] = {disabled: false}
+            console.log(value, "VALUE")
+			myObj[value.shift] = {selected: true, marked: true, selectedColor: 'blue'}
 		});
 		this.setState({_markedDates: myObj})
-		console.log(this.sate)
+		console.log(this.state)
   }
   
   onDaySelect = (day) => {
-      const _selectedDay = moment(day.dateString).format(_format);
-      
-      let marked = true;
-      let markedDates = {}
-      if (this.state._markedDates[_selectedDay]) {
-        // Already in marked dates, so reverse current marked state
-        marked = !this.state._markedDates[_selectedDay].marked;
-        markedDates = this.state._markedDates[_selectedDay];
-      }
-      
-      markedDates = {...markedDates, ...{ marked }};
-      
-      // Create a new object using object property spread since it should be immutable
-      // Reading: https://davidwalsh.name/merge-objects
-      const updatedMarkedDates = {...this.state._markedDates, ...{ [_selectedDay]: markedDates } }
-      
-      // Triggers component to render again, picking up the new state
-      this.setState({ _markedDates: updatedMarkedDates });
-		
-			console.log(this.state, "AFTER NEW")
-			console.log(this.state._markedDates, "Marked Date")
+    console.log(day)
+    let data = this.props
+    let i = data.selected_food.length,
+    selectedData;
+
+    while(i--) {
+        console.log(data.selected_food[i].shift, "loop data")
+        if(data.selected_food[i].shift == day.dateString) {
+            selectedData = data.selected_food[i];
+            break;
+        } else {
+          selectedData = undefined;
+        }
+    }
+    if(selectedData !== undefined) {
+       Actions.ListItem({employee: selectedData});
+    } else {
+      Actions.employeeCreate();
+    }
+   
   }
   
   render() {
@@ -67,7 +68,7 @@ class Lunch_Calendar extends React.Component {
 
             // hideArrows={true}
 
-            onDayPress={this.onDaySelect}
+            onDayPress={this.onDaySelect.bind(this)}
             markedDates={this.state._markedDates}
         />
       </View>
