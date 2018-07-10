@@ -13,6 +13,9 @@ class ListRestaurant extends Component {
 	onRowPress() {
 		Actions.Selected_view({employee: this.props.employee});
 	}
+	editPress() {
+		Actions.employeeEdit({employee: this.props.employee});
+	}
 	ratingCompleted(rating) {
 		console.log(rating, "RATING")
 	}
@@ -75,6 +78,12 @@ class ListRestaurant extends Component {
 						backgroundColor='#03A9F4'
 						buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
 						title='Show More' />
+					<Button
+						icon={{name: 'filter'}}
+						onPress={this.editPress.bind(this)}
+						backgroundColor='#cb2727'
+						buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+						title='Edit' />
 				</Card>
 			</View>
 		);

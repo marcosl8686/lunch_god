@@ -16,7 +16,7 @@ const RouterComponent = () => {
 				</Scene>
 				<Scene key='main'>
 					<Scene key='Lunch_Calendar'rightTitle="Add" onRight={() => { Actions.employeeCreate()}}  component={Lunch_Calendar} title="Selected Restaurant" />
-					<Scene key='ListItem'  component={ListItem} title="Employee List" />
+					<Scene key='ListItem'  component={ListItem} title="Lunch Location" />
 					<Scene key='Selected_view' component={Selected_view} title="Selected Restaurant" />
 					<Scene key='employeeCreate' component={EmployeeCreate} title="Schedule Lunch" />
 					<Scene key='employeeEdit'  component={EmployeeEdit} title='Edit Restaurant' />

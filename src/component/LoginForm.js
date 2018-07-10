@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser} from '../actions'
 import {Card, CardSection, Input, Button, Spinner} from './common';
 
 class LoginForm extends Component {
-	
+	componentWillMount() {
+		AsyncStorage.getItem('myKey').then((value) => {
+			this.props.emailChanged(value);
+		});
+	}
 	onEmailChange(text) {
+		AsyncStorage.setItem('myKey', text);
 		this.props.emailChanged(text);
 	}
 	onPasswordChange(text) {

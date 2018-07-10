@@ -17,14 +17,14 @@ class EmployeeEdit extends Component {
 		});
 	}
 	
-	onButtonPress() {
-		const {name, food_type, shift} = this.props;
-		this.props.foodSave({name, food_type, shift, uid: this.props.employee.uid})
-		console.log(name, food_type, shift);
-	}
+//	onButtonPress() {
+//		const {name,food_type,shift, image_url,rating, M_rating, L_rating, P_rating, A_rating } = this.props;
+//		this.props.foodSave({name,food_type,shift, image_url,rating, M_rating, L_rating, P_rating, A_rating, uid: this.props.employee.uid})
+//		console.log(name, food_type, shift);
+//	}
 	onTextPress() {
 		const {food, shift} = this.props;
-		Communications.text(food_type, `Your upcoming shift is on ${shift}`);
+		Communications.text(food_type, `on ${shift}`);
 	}
 	onAccept() {
 		const {uid} = this.props.employee;
@@ -38,11 +38,6 @@ class EmployeeEdit extends Component {
 		return(
 			<Card>
 				<EmployeeForm />
-				<CardSection>
-					<Button onPress={this.onButtonPress.bind(this)}>
-						Save Changes
-					</Button>
-				</CardSection>
 				<CardSection>
 					<Button onPress={this.onTextPress.bind(this)}>
 						TEXT
