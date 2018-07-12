@@ -6,7 +6,7 @@ import { ListItem } from 'react-native-elements'
 
 class ListRestaurant extends Component {
   onRowPress() {
-    Actions.employeeEdit({ employee: this.props.restaurant_list });
+    Actions.employeeCreate({ employee: this.props.restaurant_list });
   }
 
   render() {
@@ -21,7 +21,6 @@ class ListRestaurant extends Component {
 						title={name}
 						subtitle={location.address1}
 						avatar={{uri: image_url}}
-						onPress={this.onRowPress}
 					/>
       </TouchableWithoutFeedback>
     );

@@ -9,12 +9,16 @@ class LoginForm extends Component {
 		AsyncStorage.getItem('myKey').then((value) => {
 			this.props.emailChanged(value);
 		});
+		AsyncStorage.getItem('myPass').then((value) => {
+			this.props.passwordChanged(value);
+		});
 	}
 	onEmailChange(text) {
 		AsyncStorage.setItem('myKey', text);
 		this.props.emailChanged(text);
 	}
 	onPasswordChange(text) {
+		AsyncStorage.setItem('myPass', text);
 		this.props.passwordChanged(text);
 	}
 	onButtonPress() {
