@@ -52,7 +52,7 @@ class Lunch_Calendar extends React.Component {
     if(selectedData !== undefined) {
        Actions.ListItem({employee: selectedData});
     } else {
-      Actions.employeeCreate();
+      Actions.YelpSearch();
     }
    
   }
