@@ -32,12 +32,16 @@ class FoodCreate extends Component {
 		const M_rating = 0,
 					L_rating = 0,
 					P_rating = 0,
-					A_rating = 0
+					A_rating = 0,
+					M_comment ='',
+					L_comment = '',
+					P_comment = '',
+					A_comment = ''
 		
 		console.log(location, "location")
 		console.log(image_url, "image url")
 		console.log(rating, "rating")
-		this.props.foodCreate({name,food_type,shift: shift || this.props.selected_day, location, image_url,rating, M_rating, L_rating, P_rating, A_rating, url });
+		this.props.foodCreate({name,food_type,shift: shift || this.props.selected_day, location, image_url,rating, M_rating, L_rating, P_rating, A_rating, url, M_comment, L_comment, P_comment, A_comment });
 	}
 
 	render() {

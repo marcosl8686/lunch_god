@@ -87,7 +87,7 @@ class ListRestaurant extends Component {
 						onPress={this.onRowPress.bind(this)}
 						backgroundColor='#03A9F4'
 						buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-						title='Show More' 
+						title='Rate & Comment' 
 						style={{marginTop:5,marginBottom:5}}
 						/>
 					<Button
@@ -95,7 +95,7 @@ class ListRestaurant extends Component {
 						onPress={this.editPress.bind(this)}
 						backgroundColor='#cb2727'
 						buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-						title='Edit'
+						title='Remove'
 						style={{marginTop:5,marginBottom:5}}
 						  />
 				</Card>
