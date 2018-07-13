@@ -10,6 +10,10 @@ const _format = 'YYYY-MM-DD'
 const _today = moment().format(_format)
 
 class EmployeeForm extends Component {
+	componentWillMount() {
+		console.log(this.props, "CREATE PROPS")
+	}
+	
 	render() {
 		return(
 			<View>
@@ -17,13 +21,13 @@ class EmployeeForm extends Component {
 					<Input label="Name" placeholder="Cancun Juice" value={this.props.name} onChangeText ={ value => this.props.foodUpdate({prop: 'name', value: value})}/>
 				</CardSection>
 				<CardSection>
-					<Input label="Type" placeholder="Mexican Food" value={this.props.food_type} onChangeText = { value => this.props.foodUpdate({prop: 'food_type', value: value})}/>
+					<Input label="Comment" placeholder="Best Tortas Ever!" value={this.props.food_type} onChangeText = { value => this.props.foodUpdate({prop: 'food_type', value: value})}/>
 				</CardSection>
 				<CardSection style={{ flexDirection: 'column'}}>
 					<Text style={styles.pickerTextSyle}>Select Day:</Text>
 					<DatePicker
 						style={{width: 200}}
-						date={_today}
+						date={this.props.selected_day}
 						mode="date"
 						placeholder="select date"
 						format="YYYY-MM-DD"

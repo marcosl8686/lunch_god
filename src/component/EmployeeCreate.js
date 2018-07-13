@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import {Text, ListView, View} from 'react-native';
+import {Text, ListView, View, Linking } from 'react-native';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {foodUpdate, foodCreate, foodFetch} from '../actions';
@@ -8,7 +8,7 @@ import {Card, CardSection, Button} from './common';
 import EmployeeForm from './EmployeeForm';
 import moment from 'moment';
 import ListRestaurant from './ListRestaurant';
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem, Icon } from 'react-native-elements'
 
 const _format = 'YYYY-MM-DD'
 const _today = moment().format(_format)
@@ -17,6 +17,7 @@ class FoodCreate extends Component {
 	state = { showResults: false };
 
 	componentWillMount() {
+		console.log(this.props, "Create props")
     this.props.foodFetch();
 		_.each(this.props.employee, (value, prop) => {
 			this.props.foodUpdate({prop, value});
@@ -27,7 +28,7 @@ class FoodCreate extends Component {
 	onButtonPress() {
 		console.log(this.props, "ONPRESS STATE")
 		const {name, food_type, shift} = this.props;
-		const {location, image_url, rating} = this.props.employee;
+		const {location, image_url, rating, url} = this.props.employee;
 		const M_rating = 0,
 					L_rating = 0,
 					P_rating = 0,
@@ -36,7 +37,7 @@ class FoodCreate extends Component {
 		console.log(location, "location")
 		console.log(image_url, "image url")
 		console.log(rating, "rating")
-		this.props.foodCreate({name,food_type,shift: shift || _today, location, image_url,rating, M_rating, L_rating, P_rating, A_rating });
+		this.props.foodCreate({name,food_type,shift: shift || this.props.selected_day, location, image_url,rating, M_rating, L_rating, P_rating, A_rating, url });
 	}
 
 	render() {
@@ -47,6 +48,14 @@ class FoodCreate extends Component {
 		 		<Button onPress={this.onButtonPress.bind(this)}>
 		 			Create
 		 		</Button>
+		 	</CardSection>
+		 	<CardSection style={{alignItems:'center'}}>
+		 		<Icon
+					raised
+					name='yelp'
+					type='material-community'
+					color='#d32323'
+					onPress={() => Linking.openURL(this.props.employee.url)} />
 		 	</CardSection>
 		 </Card>
 		);

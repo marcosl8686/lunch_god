@@ -39,11 +39,6 @@ class EmployeeEdit extends Component {
 			<Card>
 				<EmployeeForm />
 				<CardSection>
-					<Button onPress={this.onTextPress.bind(this)}>
-						TEXT
-					</Button>
-				</CardSection>
-				<CardSection>
 					<Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
 						Delete
 					</Button>

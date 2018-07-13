@@ -5,8 +5,12 @@ import { CardSection } from './common';
 import { ListItem } from 'react-native-elements'
 
 class ListRestaurant extends Component {
+	componentWillMount() {
+		console.log(this.props, "Component will mount on list restaurant")
+	}
+	
   onRowPress() {
-    Actions.employeeCreate({ employee: this.props.restaurant_list });
+    Actions.employeeCreate({ employee: this.props.restaurant_list, selected_day: this.props.selected_day });
   }
 
   render() {

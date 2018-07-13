@@ -38,20 +38,20 @@ class Selected_View extends Component {
 		const { currentUser } = firebase.auth();
 	  console.log(currentUser.uid, "CURRENT USER")
 		console.log("DRgkzDVuUSdzpYxteoswJuBNNIv1")
-		const {name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating} = this.props.employee;
+		const {name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating, userEmail, url} = this.props.employee;
 		switch (currentUser.uid) {
 			case 'DRgkzDVuUSdzpYxteoswJuBNNIv1':
 				console.log("marcos Rating")
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating: score, L_rating, P_rating, A_rating, uid: this.props.employee.uid})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating: score, L_rating, P_rating, A_rating, url, uid: this.props.employee.uid, userEmail})
 				break;
 			case '43KPmdR4vRX2D4X88iRHh7zt1du2':
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating: score, P_rating, A_rating, uid: this.props.employee.uid})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating: score, P_rating, A_rating, url, uid: this.props.employee.uid, userEmail})
 				break;
 			case '2xSnkH0vIEVs2QfCpww3oI3rFM13':
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating: score, uid: this.props.employee.uid})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating: score, url, uid: this.props.employee.uid, userEmail})
 				break;
 			case 'ad08OE432idJzNzCWTS4YU1Od5k1':
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating: score, A_rating, uid: this.props.employee.uid})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating: score, A_rating, url, uid: this.props.employee.uid, userEmail})
 				break;
 			default:
 				break;

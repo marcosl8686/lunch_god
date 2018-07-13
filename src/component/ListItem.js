@@ -21,7 +21,7 @@ class ListRestaurant extends Component {
 	}
 	
 	render() {
-		const {name, image_url, location, A_rating, L_rating, M_rating, P_rating} = this.props.employee;
+		const {name, image_url, location, A_rating, L_rating, M_rating, P_rating, food_type, userEmail} = this.props.employee;
 		return (
 			<View>
 				<Card
@@ -34,10 +34,20 @@ class ListRestaurant extends Component {
 						{location.display_address[1]}
 					</Text>
 					<CardSection>
+						<Text>
+							User: {userEmail}
+						</Text>
+					</CardSection>
+					<CardSection>
+						<Text>
+							{food_type}
+						</Text>
+					</CardSection>
+					<CardSection>
 						<Rating
 							type='custom'
 							ratingColor='#3498db'
-							ratingBackgroundColor='#c8c7c8'
+							ratingBackgroundColor='#837979'
 							imageSize={10}
 							startingValue={P_rating}
 							onFinishRating={this.ratingCompleted}
@@ -45,8 +55,8 @@ class ListRestaurant extends Component {
 						/>
 						<Rating
 							type='custom'
-							ratingColor='#cedb34'
-							ratingBackgroundColor='#c8c7c8'
+							ratingColor='#d01515'
+							ratingBackgroundColor='#837979'
 							imageSize={10}
 							startingValue={L_rating}
 							onFinishRating={this.ratingCompleted}
@@ -54,8 +64,8 @@ class ListRestaurant extends Component {
 						/>
 						<Rating
 							type='custom'
-							ratingColor='#db3434'
-							ratingBackgroundColor='#c8c7c8'
+							ratingColor='#000000'
+							ratingBackgroundColor='#837979'
 							imageSize={10}
 							startingValue={A_rating}
 							onFinishRating={this.ratingCompleted}
@@ -63,8 +73,8 @@ class ListRestaurant extends Component {
 						/>
 						<Rating
 							type='custom'
-							ratingColor='#000000'
-							ratingBackgroundColor='#c8c7c8'
+							ratingColor='#13c113'
+							ratingBackgroundColor='#837979'
 							imageSize={10}
 							startingValue={M_rating}
 							onFinishRating={this.ratingCompleted}
@@ -77,13 +87,17 @@ class ListRestaurant extends Component {
 						onPress={this.onRowPress.bind(this)}
 						backgroundColor='#03A9F4'
 						buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-						title='Show More' />
+						title='Show More' 
+						style={{marginTop:5,marginBottom:5}}
+						/>
 					<Button
 						icon={{name: 'filter'}}
 						onPress={this.editPress.bind(this)}
 						backgroundColor='#cb2727'
 						buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-						title='Edit' />
+						title='Edit'
+						style={{marginTop:5,marginBottom:5}}
+						  />
 				</Card>
 			</View>
 		);

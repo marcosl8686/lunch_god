@@ -22,13 +22,33 @@ class Lunch_Calendar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 		let myObj = {}
+		var userColor;
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
+		
+		
     console.log(nextProps, 'Calendar NEXT PROPS')
 		_.each(nextProps.selected_food, (value, prop) => {
             console.log(value, "VALUE")
-			myObj[value.shift] = {selected: true, marked: true, selectedColor: 'blue'}
+			switch (value.userEmail) {
+				case 'marcos.lee@livingspaces.com':
+					userColor = 'green';
+					break;
+				case 'leo.garcia@livingspaces.com':
+					userColor = 'red';
+					break;
+				case 'pete.franco@livingspaces.com':
+					userColor = 'blue';
+					break;
+				case 'aaron.doan@livingspaces.com':
+					userColor = 'black';
+					break;
+				default:
+					userColor = 'pink';
+					break;
+			}
+			myObj[value.shift] = {selected: true, marked: true, selectedColor: userColor}
 		});
 		this.setState({_markedDates: myObj})
 		console.log(this.state)
@@ -52,7 +72,7 @@ class Lunch_Calendar extends React.Component {
     if(selectedData !== undefined) {
        Actions.ListItem({employee: selectedData});
     } else {
-      Actions.YelpSearch();
+      Actions.YelpSearch({dateString: day.dateString});
     }
    
   }

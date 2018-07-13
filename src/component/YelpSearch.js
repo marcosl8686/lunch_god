@@ -20,7 +20,7 @@ class YelpSearch extends Component {
 
 	componentWillMount() {
     this.props.foodFetch();
-    console.log(this.props, 'List component mounted')
+    console.log(this.props, '~~22')
     this.createDataSource(this.props);
   }
 
@@ -56,7 +56,7 @@ class YelpSearch extends Component {
 
   renderRow(searchData) {
 		console.log(searchData, "OK!!!")
-    return <ListRestaurant restaurant_list={searchData} />;
+    return <ListRestaurant selected_day={this.props.dateString} restaurant_list={searchData} />;
   }
 	
 	renderResults() {
@@ -66,7 +66,7 @@ class YelpSearch extends Component {
 		if(this.state.showResults) {
 			return <ListView
         dataSource={this.dataSource}
-        renderRow={this.renderRow}
+        renderRow={this.renderRow.bind(this)}
         style={{height: 450}}
       />
 		}
