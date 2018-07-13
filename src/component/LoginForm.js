@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, AsyncStorage} from 'react-native';
+import {View, Text, AsyncStorage, ImageBackground } from 'react-native';
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser} from '../actions'
 import {Card, CardSection, Input, Button, Spinner} from './common';
+import main_bg from '../../assets/food_bg.jpg';
 
 class LoginForm extends Component {
 	componentWillMount() {
@@ -50,18 +51,21 @@ class LoginForm extends Component {
 	
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input label="Email" placeholder="email@gmail.com" onChangeText={this.onEmailChange.bind(this)} value={this.props.email} />
-        </CardSection>
-         <CardSection>
-          <Input secureTextEntry label="Password" placeholder="password" onChangeText={this.onPasswordChange.bind(this)} value={this.props.password} />
-        </CardSection>
-        {this.renderError()}
-         <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+			<ImageBackground source={main_bg} style={{width: '100%', height: '100%'}}>
+				 <Card>
+					<CardSection>
+						<Input label="Email" placeholder="email@gmail.com" onChangeText={this.onEmailChange.bind(this)} value={this.props.email} />
+					</CardSection>
+					 <CardSection>
+						<Input secureTextEntry label="Password" placeholder="password" onChangeText={this.onPasswordChange.bind(this)} value={this.props.password} />
+					</CardSection>
+					{this.renderError()}
+					 <CardSection>
+						{this.renderButton()}
+					</CardSection>
+				</Card>
+			</ImageBackground>
+   
     );
   }
 }

@@ -11,6 +11,7 @@ let ViewRating = 0;
 let UserComment;
 
 class Selected_View extends Component {
+	state = {userCommentInput: '', userRatingInput: 0}
 	componentWillMount() {
 		console.log(this.props)
 		const { currentUser } = firebase.auth();
@@ -39,8 +40,12 @@ class Selected_View extends Component {
 	}
 	ratingCompleted(score) {
 		console.log(score)
-		console.log(this.state)
-		console.log(this.props.employee, "Passed Props from List item11")
+		this.setState({userRatingInput: score})
+	}
+	commentInput(input) {
+		this.setState({userCommentInput: input})
+	}
+	onSubmit() {
 		const { currentUser } = firebase.auth();
 	  console.log(currentUser.uid, "CURRENT USER")
 		console.log("DRgkzDVuUSdzpYxteoswJuBNNIv1")
@@ -48,24 +53,20 @@ class Selected_View extends Component {
 		switch (currentUser.uid) {
 			case 'DRgkzDVuUSdzpYxteoswJuBNNIv1':
 				console.log("marcos Rating")
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating: score, L_rating, P_rating, A_rating, url, M_comment, L_comment, P_comment, A_comment, uid: this.props.employee.uid, userEmail})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating: this.state.userRatingInput, L_rating, P_rating, A_rating, url, M_comment: this.state.userCommentInput, L_comment, P_comment, A_comment, uid: this.props.employee.uid, userEmail})
 				break;
 			case '43KPmdR4vRX2D4X88iRHh7zt1du2':
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating: score, P_rating, A_rating, url, M_comment, L_comment, P_comment, A_comment, uid: this.props.employee.uid, userEmail})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating: this.state.userRatingInput, P_rating, A_rating, url, M_comment, L_comment: this.state.userCommentInput, P_comment, A_comment, uid: this.props.employee.uid, userEmail})
 				break;
 			case '2xSnkH0vIEVs2QfCpww3oI3rFM13':
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating: score, url, M_comment, L_comment, P_comment, A_comment, uid: this.props.employee.uid, userEmail})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating, A_rating: this.state.userRatingInput, url, M_comment, L_comment, P_comment, A_comment: this.state.userCommentInput, uid: this.props.employee.uid, userEmail})
 				break;
 			case 'ad08OE432idJzNzCWTS4YU1Od5k1':
-				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating: score, A_rating, url, M_comment, L_comment, P_comment, A_comment, uid: this.props.employee.uid, userEmail})
+				this.props.foodSave({name, food_type, shift, location, image_url, rating, M_rating, L_rating, P_rating: this.state.userRatingInput, A_rating, url, M_comment, L_comment, P_comment: this.state.userCommentInput, A_comment, uid: this.props.employee.uid, userEmail})
 				break;
 			default:
 				break;
 						}
-		
-	}
-	onSubmit() {
-		console.log('ok')
 	}
   render() {
     return(
@@ -84,9 +85,9 @@ class Selected_View extends Component {
       			Comment:
       		</Text>
       		<TextInput
-      		style={{height: 40, flex:1, borderColor: 'gray', borderWidth: 1}}
+      		style={{height: 40, flex:1, borderColor: 'gray', borderWidth: 1, padding: 5}}
         	onChangeText={this.commentInput.bind(this)}
-        	value={userComment}
+        	value={this.state.userCommentInput}
       		  />
       	</CardSection>
       	<Button
