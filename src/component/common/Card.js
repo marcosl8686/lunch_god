@@ -19,10 +19,7 @@ const styles = {
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10,
-		flex:1,
-		justifyContent: 'center',
-		alignItems: 'center'
+    marginTop: 10
   }
 };
 
