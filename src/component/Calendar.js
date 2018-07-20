@@ -34,10 +34,6 @@ class Lunch_Calendar extends React.Component {
         if (nextProps.selected_food.length > 0) {
             upcomingRestaurant = [];
             nextProps.selected_food.forEach(function (data, int) {
-                console.log(data, "upcoming food")
-                console.log(data.shift, 'compare day')
-                console.log(moment(_today), 'compare day 2')
-                console.log(moment(data.shift).isSameOrAfter(_today), 'date time is future or not')
                 if (moment(data.shift).isSameOrAfter(_today)) {
                     var found = true;
                     for (var i = 0; i < upcomingRestaurant.length; i++) {
