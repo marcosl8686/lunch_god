@@ -4,7 +4,7 @@ import moment from 'moment';
 import { View, ListView } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { connect } from 'react-redux';
-import { foodFetch } from '../actions';
+import { foodFetch, foodUpdate } from '../actions';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem } from 'react-native-elements';
 import UpComingRest from './UpComingRest';
@@ -13,6 +13,7 @@ import UpComingRest from './UpComingRest';
 const _format = 'YYYY-MM-DD'
 const _today = moment().format(_format)
 const _maxDate = moment().add(15, 'days').format(_format)
+var upcomingRestaurant = [];
 
 class Lunch_Calendar extends React.Component {
     state = { _markedDates: { [_today]: { disabled: true } } }
@@ -28,7 +29,22 @@ class Lunch_Calendar extends React.Component {
         // nextProps are the next set of props that this component
         // will be rendered with
         // this.props is still the old set of props
-        console.log(nextProps, 'Calendar NEXT PROPS')
+        
+        if (this.props.selected_food.length > 0) {
+            console.log(this.dataSource, 'new dataSource')
+            this.props.selected_food.forEach(function (data, int) {
+                console.log(data, "upcoming food")
+                if (moment().isSameOrAfter(data.shift)) {
+                    if(!upcomingRestaurant.includes(data.shift)) {
+                      upcomingRestaurant.push(data)
+                    }
+                };
+            })
+          const ds = new ListView.DataSource({
+				rowHasChanged: (r1, r2) => r1 !== r2
+          });
+          this.dataSource = ds.cloneWithRows(upcomingRestaurant);
+        }
         _.each(nextProps.selected_food, (value, prop) => {
             console.log(value, "VALUE")
             switch (value.userEmail) {
@@ -79,6 +95,7 @@ class Lunch_Calendar extends React.Component {
         if (selectedData !== undefined) {
             Actions.ListItem({ employee: selectedData });
         } else {
+            this.props.foodUpdate({prop: 'shift', value: day.dateString})
             Actions.YelpSearch({ dateString: day.dateString });
         }
 
@@ -88,24 +105,12 @@ class Lunch_Calendar extends React.Component {
         return <UpComingRest restaurant_list={searchData} />;
     }
     upcomingFood() {
-        if (this.props.selected_food.length > 0) {
-            const ds = new ListView.DataSource({
-                rowHasChanged: (r1, r2) => r1 !== r2
-            });
-            this.dataSource = ds.cloneWithRows(this.props.selected_food);
-            this.props.selected_food.forEach(function (data, int) {
-                console.log(data, "upcoming food")
-                if (moment().isSameOrAfter(data.shift)) {
-                    console.log(data.shift, 'future');
-                    console.log(this.dataSource)
-                    return <ListView
-                        dataSource={this.dataSource}
-                        renderRow={this.renderRow}
-                        style={{ height: 250 }}
-                    />
-                };
-            })
-
+      if(upcomingRestaurant.length > 0) {
+        return <ListView
+                  dataSource={this.dataSource}
+                  renderRow={this.renderRow}
+                  style={{ height: 250 }}
+              />
         }
     }
 
@@ -139,4 +144,4 @@ const mapStateToProps = state => {
     return { selected_food };
 };
 
-export default connect(mapStateToProps, { foodFetch })(Lunch_Calendar)
+export default connect(mapStateToProps, { foodFetch, foodUpdate })(Lunch_Calendar)

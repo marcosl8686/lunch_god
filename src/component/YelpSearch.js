@@ -94,7 +94,7 @@ class YelpSearch extends Component {
 		 	</CardSection>
 		 		<List style={{flex:1}}>
 		 			{this.renderResults()}
-		 	</List>
+		 	  </List>
 		 </Card>
 		);
 	}
