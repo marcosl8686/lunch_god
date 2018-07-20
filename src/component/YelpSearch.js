@@ -63,7 +63,8 @@ class YelpSearch extends Component {
 		console.log(this.props, "PROPS")
 		console.log(this.state, "STATE")
 		console.log(this.dataSource, "DATA SOURCE")
-		if(this.state.showResults) {
+        if (this.state.showResults) {
+            console.log(this.dataSource, "DATA SOURCE!!")
 			return <ListView
         dataSource={this.dataSource}
         renderRow={this.renderRow.bind(this)}
