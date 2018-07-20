@@ -13,6 +13,7 @@ import UpComingRest from './UpComingRest';
 const _format = 'YYYY-MM-DD'
 const _today = moment().format(_format)
 const _maxDate = moment().add(15, 'days').format(_format)
+var food_day;
 var upcomingRestaurant = [];
 
 class Lunch_Calendar extends React.Component {
@@ -30,14 +31,23 @@ class Lunch_Calendar extends React.Component {
         // will be rendered with
         // this.props is still the old set of props
         
-        if (this.props.selected_food.length > 0) {
-            console.log(this.dataSource, 'new dataSource')
-            this.props.selected_food.forEach(function (data, int) {
+        if (nextProps.selected_food.length > 0) {
+            upcomingRestaurant = [];
+            nextProps.selected_food.forEach(function (data, int) {
                 console.log(data, "upcoming food")
-                if (moment().isSameOrAfter(data.shift)) {
-                    if(!upcomingRestaurant.includes(data.shift)) {
-                      upcomingRestaurant.push(data)
+                console.log(data.shift, 'compare day')
+                console.log(moment(_today), 'compare day 2')
+                console.log(moment(data.shift).isSameOrAfter(_today), 'date time is future or not')
+                if (moment(data.shift).isSameOrAfter(_today)) {
+                    var found = true;
+                    for (var i = 0; i < upcomingRestaurant.length; i++) {
+                        if (upcomingRestaurant[i].shift == data.shift) {
+                            found = false;
+                        }
                     }
+                    if (found) {
+                        upcomingRestaurant.push(data)
+                    }     
                 };
             })
           const ds = new ListView.DataSource({
