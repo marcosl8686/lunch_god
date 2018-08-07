@@ -46,8 +46,11 @@ class Lunch_Calendar extends React.Component {
                     }     
                 };
             })
+					upcomingRestaurant.sort(function(a,b) { 
+							return new Date(a.shift).getTime() - new Date(b.shift).getTime() 
+					});
           const ds = new ListView.DataSource({
-				rowHasChanged: (r1, r2) => r1 !== r2
+					rowHasChanged: (r1, r2) => r1 !== r2
           });
           this.dataSource = ds.cloneWithRows(upcomingRestaurant);
         }
