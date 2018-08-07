@@ -8,6 +8,7 @@ import { foodFetch, foodUpdate } from '../actions';
 import { Actions } from 'react-native-router-flux';
 import { List, ListItem } from 'react-native-elements';
 import UpComingRest from './UpComingRest';
+import firebase from 'firebase';
 
 
 const _format = 'YYYY-MM-DD'
@@ -15,6 +16,7 @@ const _today = moment().format(_format)
 const _maxDate = moment().add(15, 'days').format(_format)
 var food_day;
 var upcomingRestaurant = [];
+var userFavorites = [];
 
 class Lunch_Calendar extends React.Component {
     state = { _markedDates: { [_today]: { disabled: true } } }
@@ -30,7 +32,8 @@ class Lunch_Calendar extends React.Component {
         // nextProps are the next set of props that this component
         // will be rendered with
         // this.props is still the old set of props
-        
+        const { currentUser } = firebase.auth();
+				console.log(currentUser.email, "CURRENT USER")
         if (nextProps.selected_food.length > 0) {
             upcomingRestaurant = [];
             nextProps.selected_food.forEach(function (data, int) {
@@ -54,8 +57,12 @@ class Lunch_Calendar extends React.Component {
           });
           this.dataSource = ds.cloneWithRows(upcomingRestaurant);
         }
+					userFavorites = [];
         _.each(nextProps.selected_food, (value, prop) => {
             console.log(value, "VALUE")
+						if(currentUser.email == value.userEmail) {
+							userFavorites.push(value);
+						}
             switch (value.userEmail) {
                 case 'marcos.lee@livingspaces.com':
                     userColor = 'green';
@@ -104,13 +111,13 @@ class Lunch_Calendar extends React.Component {
         if (selectedData !== undefined) {
             Actions.ListItem({ employee: selectedData });
         } else {
+						console.log(userFavorites, "testing state")
             this.props.foodUpdate({prop: 'shift', value: day.dateString})
-            Actions.YelpSearch({ dateString: day.dateString });
+            Actions.YelpSearch({ dateString: day.dateString, myFav: userFavorites });
         }
 
     }
     renderRow(searchData) {
-        console.log(searchData, "OK!!!")
         return <UpComingRest restaurant_list={searchData} />;
     }
     upcomingFood() {

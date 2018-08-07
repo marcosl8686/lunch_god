@@ -53,6 +53,13 @@ class YelpSearch extends Component {
 			this.setState({ showResults: !this.state.showModal });
 		});
 	}
+	myList() {
+			const ds = new ListView.DataSource({
+				rowHasChanged: (r1, r2) => r1 !== r2
+			});
+			this.dataSource = ds.cloneWithRows(this.props.myFav);
+			this.setState({ showResults: !this.state.showModal });
+	}
 
   renderRow(searchData) {
 		console.log(searchData, "OK!!!")
@@ -90,6 +97,9 @@ class YelpSearch extends Component {
 		 	<CardSection>
 		 		<Button onPress={this.onSearch.bind(this)}>
 		 			Search
+		 		</Button>
+		 		<Button onPress={this.myList.bind(this)}>
+		 			My List
 		 		</Button>
 		 	</CardSection>
 		 		<List style={{flex:1}}>
